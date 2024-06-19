@@ -58,8 +58,8 @@ impl Structs {
         // 遍历字符串中的字符，将 '_' 替换为对应的大写字符
         let mut service_name = capitalize_struct_name(&service_name);
         service_name.push_str("Service");
-       
-       let mut service_code = format!("use crate::model::table::structs::{};\n\n", service_name);
+
+        let mut _service_code = format!("use crate::model::table::structs::{};\n\n", service_name);
 
         todo!("generate_service_code")
     }
