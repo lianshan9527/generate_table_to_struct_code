@@ -34,18 +34,8 @@ async fn main() -> Result<()> {
     };
 
     let struct_code = table_struct.generate_struct_code().await;
-
-    //生成service层代码
-    let service_code = table_struct.generate_service_code().await;
-    tokio::spawn(async move {
-        write_to_service_file(table_name, &service_code)
-            .await
-            .unwrap_or_else(|_| {
-                println!("生成service文件失败!");
-                ()
-            });
-    });
-    tokio::spawn(async move {
+    let struct_task = tokio::spawn(async move {
+        println!("table_name:{}, struct_code:{}", table_name, struct_code);
         write_to_struct_file(table_name, &struct_code)
             .await
             .unwrap_or_else(|_| {
@@ -53,5 +43,18 @@ async fn main() -> Result<()> {
                 ()
             });
     });
+
+    //生成service层代码
+    let service_code = table_struct.generate_service_code().await;
+    let service_task = tokio::spawn(async move {
+        write_to_service_file(table_name, &service_code)
+            .await
+            .unwrap_or_else(|_| {
+                println!("生成service文件失败!");
+                ()
+            });
+    });
+
+    let (_, _) = tokio::join!(service_task, struct_task);
     Ok(())
 }
