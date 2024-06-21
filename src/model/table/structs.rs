@@ -8,7 +8,7 @@ pub struct Structs {
 }
 
 impl Structs {
-    pub async fn generate_struct_code(&self) -> String {
+    pub async fn generate_struct_code(&self) -> Result<String, tokio::io::Error> {
         //对名字进行处理，如果名字中有下划线，则将下划线替换为驼峰式命名法
         let struct_name = self.name.clone();
         // 遍历字符串中的字符，将 '_' 替换为对应的大写字符
@@ -49,10 +49,10 @@ impl Structs {
         ));
         struct_code.push_str("}\n");
 
-        struct_code
+        Ok(struct_code)
     }
 
-    pub async fn generate_service_code(&self) -> String {
+    pub async fn generate_service_code(&self) -> Result<String, tokio::io::Error> {
         //对名字进行处理，如果名字中有下划线，则将下划线替换为驼峰式命名法
         let service_name = self.name.clone();
         // 遍历字符串中的字符，将 '_' 替换为对应的大写字符
@@ -62,6 +62,7 @@ impl Structs {
         let mut _service_code = format!("use crate::model::table::structs::{};\n\n", service_name);
 
         todo!("generate_service_code")
+        //"".to_string()
     }
 }
 

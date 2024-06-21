@@ -11,7 +11,6 @@ pub async fn write_to_struct_file(
 ) -> Result<(), Box<dyn Error>> {
     //获取项目根路径
     let mut path = std::env::current_dir().unwrap();
-    println!("current_dir: {}", path.display());
     //在根路径下创建models文件夹
     // 在根路径下创建models文件夹
     path.push("models");
