@@ -14,7 +14,7 @@ impl Structs {
         // 遍历字符串中的字符，将 '_' 替换为对应的大写字符
         let struct_name = capitalize_struct_name(&struct_name);
         let mut struct_code = format!(
-            "use serde::{{Deserialize, Serialize}};\n\nuse serde_json;\n\n #[derive(Debug, Serialize,,Clone,Deserialize,Default)]\npub struct {} {{\n",
+            "use serde::{{Deserialize, Serialize}};\n\nuse serde_json;\n\n #[derive(Debug, Serialize,Clone,Deserialize,Default)]\npub struct {} {{\n",
             struct_name
         );
 

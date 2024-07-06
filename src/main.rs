@@ -50,7 +50,7 @@ async fn main() -> Result<()> {
     let table_info = Arc::new(tokio::sync::RwLock::new(table_struct));
     let table_info_clone = table_info.clone();
 
-    //生成struct层代码
+    //生成struct代码
     let struct_task = tokio::spawn(async move {
         let struct_code = table_info
             .clone()
